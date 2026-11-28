@@ -774,7 +774,13 @@ const GALLERY = [
   ['08-chef-mouse-pouch', 1004, 1504, 'Yellow jute pouch embroidered with a chef mouse holding a wooden spoon'],
   ['09-pouch-collection', 1200, 1600, 'Seven embroidered pouches in blue, black, yellow, red and crimson with character and floral designs'],
   ['10-beige-tote-portrait', 1004, 1504, 'A woman in a pinstripe blazer resting her hands on a beige jute tote embroidered with yellow and green flowers, bees and a dragonfly'],
-  ['11-black-tote-sofa', 1004, 1504, 'A woman in a grey blazer seated on a tan leather sofa beside a black jute tote embroidered with a pink blossom tree and a bench']
+  ['11-black-tote-sofa', 1004, 1504, 'A woman in a grey blazer seated on a tan leather sofa beside a black jute tote embroidered with a pink blossom tree and a bench'],
+  ['12-blue-umbrella-pouch', 868, 702, 'Blue jute zip pouch embroidered with two grey forest friends sharing a yellow umbrella'],
+  ['13-window-blossom-bag', 909, 1145, 'Round black jute bag with red piping, embroidered with a lace-curtain window, climbing yellow and pink blossoms and a potted plant'],
+  ['14-festive-stockings-potli', 960, 796, 'Cream jute potli drawstring bag with a gold cord and green lace trim, embroidered with four hanging stockings on a leafy garland'],
+  ['15-garden-girl-black-sling', 942, 1034, 'Round black jute sling bag with green lace edging, embroidered with a girl with a copper ponytail and a lace skirt among tulips'],
+  ['16-blossom-bench-tote', 1504, 1226, 'Tan jute tote embroidered with pink roses hanging from a branch over a white outline bench and a grass border'],
+  ['17-moonlit-tree-tote', 1504, 1145, 'Black jute tote embroidered with a pink blossom tree in front of a pale moon, a brown dog and two girls sitting among flowers']
 ].map(([f, w, h, alt]) => ({ src: `${f}.jpg`, w, h, alt }));
 const QR_SRC = ''; // set to the payment QR image path once you have it
 
@@ -1258,9 +1264,9 @@ function renderCategory(id) {
 
 /* ---------- GALLERY ---------- */
 const G = { items: [], world: null, mx: 0, my: 0, tmx: 0, tmy: 0, raf: 0, built: false, w: 0 };
-const GD = [.4, -.4, .8, 0, 1, -.2, .5, -.5, .9, .6, -.3];            // depth of each thumbnail (parallax)
-const GR = [-.5, .4, .6, -.3, .5, -.6, .4, -.4, .3, -.4, .5];          // resting tilt in degrees (kept tiny)
-const GU = [6, 7.5, 5.5, 7, 8.5, 6.5, 7.2, 5.8, 8, 6.8, 7.8];            // float duration in seconds
+const GD = [.4, -.4, .8, 0, 1, -.2, .5, -.5, .9, .6, -.3, .7, -.6, .3, -.1, .9, -.4];            // depth of each thumbnail (parallax)
+const GR = [-.5, .4, .6, -.3, .5, -.6, .4, -.4, .3, -.4, .5, -.4, .5, -.6, .3, .4, -.5];          // resting tilt in degrees (kept tiny)
+const GU = [6, 7.5, 5.5, 7, 8.5, 6.5, 7.2, 5.8, 8, 6.8, 7.8, 6.2, 7.6, 5.9, 8.2, 6.6, 7.3];            // float duration in seconds
 function buildGallery() {
   G.world = $('#gal-world');
   G.world.innerHTML = GALLERY.map((g, i) => `<div class="gi" data-i="${i}"><span class="gi__in" style="--r0:${GR[i % GR.length]}deg;--r1:${(GR[i % GR.length] * .55).toFixed(2)}deg;--dur:${GU[i % GU.length]}s;--delay:${-(i * 1.7).toFixed(1)}s"><img src="${g.src}" alt="${esc(g.alt)}" width="${g.w}" height="${g.h}" ${i < 3 ? '' : 'loading="lazy"'} decoding="async"></span></div>`).join('');
