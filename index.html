@@ -384,6 +384,10 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;paddin
 /* Store hero is a true 16:9 frame at every width; capped so it never outgrows the screen under the header */
 #store-hero.pagehero--video{min-height:0;padding-top:var(--hdr-total)}
 #store-hero .pagehero__media{position:relative;inset:auto;width:100%;aspect-ratio:16/9;max-height:calc(100svh - var(--hdr-total))}
+/* Gallery hero: the whole 16:9 video is shown at every width (never cropped) */
+#gallery-hero.pagehero--video{min-height:0;padding-top:var(--hdr-total)}
+#gallery-hero .pagehero__media{position:relative;inset:auto;width:100%;height:auto;aspect-ratio:16/9}
+@media (max-width:640px){#gallery-hero .pagehero__copy{padding:10px 16px}#gallery-hero .pagehero__copy h1{font-size:clamp(26px,8vw,34px);line-height:1.05}#gallery-hero .pagehero__tag{margin-top:6px;font-size:clamp(17px,5vw,22px)}#gallery-hero .pagehero__sub{display:none}}
 .pagehero__veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(58,46,42,.5),rgba(58,46,42,.44))}
 .pagehero__copy{position:absolute;inset:0;z-index:2;display:grid;align-content:center;justify-items:center;text-align:center;padding:24px var(--gr) 32px var(--gl);color:#fff}
 .pagehero .pagehero__tag{margin:clamp(14px,1.8vw,24px) 0 0;font:italic 500 clamp(24px,3vw,42px)/1.2 var(--f-display);letter-spacing:.01em;text-shadow:0 2px 22px rgba(40,25,20,.45)}
