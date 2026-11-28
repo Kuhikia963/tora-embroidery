@@ -70,8 +70,8 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;paddin
 .badge[data-n="0"]{display:none}
 .badge.bump{transform:scale(1.35)}
 .hdr{gap:clamp(8px,2vw,16px)}
-@media (max-width:600px){.hdr__logo{height:58px}.icon-btn{width:40px;height:40px}.icon-btn svg{width:24px;height:24px}.nav + .hdr__tools{margin-left:2px}}
-@media (max-width:380px){.hdr{gap:4px}.hdr__logo{height:44px}.nav{gap:9px}.nav a{font-size:11.5px}.icon-btn{width:34px}.icon-btn svg{width:22px;height:22px}.nav + .hdr__tools{margin-left:0}}
+@media (max-width:600px){.hdr__logo{height:52px}.icon-btn{width:40px;height:40px}.icon-btn svg{width:24px;height:24px}.nav + .hdr__tools{margin-left:2px}}
+@media (max-width:380px){.hdr{gap:4px}.hdr__logo{height:42px}.nav{gap:9px}.nav a{font-size:11.5px}.icon-btn{width:34px}.icon-btn svg{width:22px;height:22px}.nav + .hdr__tools{margin-left:0}}
 @media (max-width:340px){.nav{gap:7px}.nav a{font-size:11px}.hdr{padding-left:12px;padding-right:12px}}
 
 /* pages */
@@ -381,6 +381,9 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;paddin
 .pagehero__media>video{opacity:0;transition:opacity 500ms ease}
 .pagehero__media>video.on{opacity:1}
 @media (max-width:860px){.pagehero--video{min-height:0;padding-top:var(--hdr-total)}.pagehero__media{position:relative;inset:auto;width:100%;aspect-ratio:1280/660}}
+/* Store hero is a true 16:9 frame at every width; capped so it never outgrows the screen under the header */
+#store-hero.pagehero--video{min-height:0;padding-top:var(--hdr-total)}
+#store-hero .pagehero__media{position:relative;inset:auto;width:100%;aspect-ratio:16/9;max-height:calc(100svh - var(--hdr-total))}
 .pagehero__veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(58,46,42,.5),rgba(58,46,42,.44))}
 .pagehero__copy{position:absolute;inset:0;z-index:2;display:grid;align-content:center;justify-items:center;text-align:center;padding:24px var(--gr) 32px var(--gl);color:#fff}
 .pagehero .pagehero__tag{margin:clamp(14px,1.8vw,24px) 0 0;font:italic 500 clamp(24px,3vw,42px)/1.2 var(--f-display);letter-spacing:.01em;text-shadow:0 2px 22px rgba(40,25,20,.45)}
@@ -425,7 +428,7 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;paddin
 <a class="skip" href="#main">Skip to content</a>
 
 <header class="hdr" id="hdr">
-  <a class="hdr__logo" href="#home" aria-label="Tora Embroidery, home"><img src="logo-color.png" alt="Tora Embroidery" width="1100" height="722"></a>
+  <a class="hdr__logo" href="#home" aria-label="Tora Embroidery, home"><img src="logo.png" alt="Tora Embroidery" width="1100" height="685"></a>
   <nav class="nav" aria-label="Main">
     <a href="#home" data-nav="home">Home</a>
     <a href="#store" data-nav="store">Store</a>
@@ -517,7 +520,7 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;paddin
 <section class="page" data-page="store" hidden>
   <div class="pagehero pagehero--video" id="store-hero">
     <div class="pagehero__media">
-      <img src="store-hero-poster.jpg" alt="" width="1280" height="660" fetchpriority="high">
+      <img src="store-hero-poster-v3.jpg" alt="" width="1280" height="720" fetchpriority="high">
       <video id="store-video" muted autoplay loop playsinline preload="auto" aria-hidden="true" tabindex="-1"></video>
     </div>
     <h1 class="sr">Designed to Stand Out</h1>
@@ -542,7 +545,7 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;paddin
 <section class="page" data-page="gallery" hidden>
   <div class="pagehero pagehero--video pagehero--text" id="gallery-hero">
     <div class="pagehero__media">
-      <img src="gallery-hero-poster.jpg" alt="" width="1280" height="560" fetchpriority="high">
+      <img src="gallery-hero-poster-v2.jpg" alt="" width="1280" height="720" fetchpriority="high">
       <video id="gallery-video" muted autoplay loop playsinline preload="auto" aria-hidden="true" tabindex="-1"></video>
       <div class="pagehero__veil" aria-hidden="true"></div>
       <div class="pagehero__copy">
@@ -622,7 +625,7 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;paddin
 <footer class="foot on-dark">
   <div class="wrap">
     <div class="foot__top">
-      <a href="#home" aria-label="Tora Embroidery, home"><img src="logo-white.png" alt="Tora Embroidery" width="1100" height="722" loading="lazy"></a>
+      <a href="#home" aria-label="Tora Embroidery, home"><img src="logo.png" alt="Tora Embroidery" width="1100" height="685" loading="lazy"></a>
       <nav aria-label="Footer">
         <a href="#home">Home</a><a href="#store">Store</a><a href="#gallery">Gallery</a><a href="#why-us">Why Us</a><a href="#cart">Cart</a>
         <a href="https://form.jotform.com/261545563093056" target="_blank" rel="noopener">Book a consultation</a>
@@ -692,16 +695,16 @@ const store = {
 
 /* ---------- data (swap images / prices here) ---------- */
 // NOTE: prices and the two last items are stand-ins until real details arrive.
-/* ---- STORE: the six main tiles ----
+/* ---- STORE: the main tiles ----
    Each tile's picture is its `img` path: to swap a thumbnail, replace that file (or point `img` at a new one).
    `alt` is the picture's description. Photos are shown 3:4 (portrait), uncropped when they are 3:4. */
 const PRODUCTS = [
   { id: 'white-tote', name: 'White Tote Bag', price: 1499, img: 'p-white-tote.jpg', alt: 'White jute tote bag hand-embroidered with a meadow of pink, yellow and white flowers, bees and ladybirds' },
-  { id: 'beige-tote', name: 'Beige Tote Bag', price: 1499, img: 'p-beige-tote.jpg', alt: 'Beige jute tote bag hand-embroidered with yellow and green flowers, bees and a dragonfly, beside a vase of flowers' },
-  { id: 'black-tote', name: 'Black Tote Bag', price: 1599, img: 'p-black-tote.jpg', alt: 'Black jute tote bag embroidered with a pink blossoming tree over a white park bench' },
   { id: 'sling-bag', name: 'Sling Bag', price: 1899, img: 'p-sling.jpg', alt: 'Round cream sling bag with a gold chain, embroidered with a girl in a sun hat among pink and blue flowers' },
+  { id: 'pouch', name: 'Pouch', price: 499, img: 'p-pouch-v2.jpg', alt: 'Small blue jute zip pouch embroidered with a grey forest creature holding a blue umbrella' },
   { id: 'desi', name: 'Desi', price: 2299, img: 'p-desi.jpg', alt: 'Cream jute bag with a small embroidered bunch of orange flowers, beside a white vase' },
-  { id: 'cushions', name: 'Cushions', price: 1299, img: 'p-cushions.jpg', alt: 'Hand-embroidered cushions, a rust-orange silk one with a rabbit and teapot and a grey linen one with blossoms, on a sofa' }
+  { id: 'cushions', name: 'Cushions', price: 1299, img: 'p-cushions.jpg', alt: 'Hand-embroidered cushions, a rust-orange silk one with a rabbit and teapot and a grey linen one with blossoms, on a sofa' },
+  { id: 'potli', name: 'Potli', price: 799, img: 'p-potli-v2.jpg', alt: 'Cream jute potli drawstring bag with a gold cord and green lace trim, embroidered with four hanging Christmas stockings on a leafy garland' }
 ];
 const byId = Object.fromEntries(PRODUCTS.map(p => [p.id, p]));
 /* ---- STORE: the hidden category pages (#store/<id>) ----
@@ -711,16 +714,45 @@ const byId = Object.fromEntries(PRODUCTS.map(p => [p.id, p]));
    `blurb` is the line under the category title. */
 const PLACEHOLDERS = 4;
 const CATEGORIES = {
-  'white-tote': { blurb: 'Light, airy and stitched by hand: floral meadows on white tote bags.' },
-  'beige-tote': { blurb: 'Warm natural jute totes with hand-embroidered blooms and garden creatures.' },
-  'black-tote': { blurb: 'Bold black totes where pink blossoms and fine white line work really stand out.' },
-  'sling-bag': { blurb: 'Round and cross-body sling bags with little embroidered stories.' },
+  'white-tote': { blurb: 'Every tote bag in one place: white, beige and black jute, stitched by hand with flower meadows, blossoms and garden scenes.', designs: [
+    { name: 'White Tote Bag', price: 1499, img: 'p-white-tote.jpg', alt: 'White jute tote bag hand-embroidered with a meadow of pink, yellow and white flowers, bees and ladybirds' },
+    { name: 'Beige Tote Bag', price: 1499, img: 'p-beige-tote.jpg', alt: 'Beige jute tote bag hand-embroidered with yellow and green flowers, bees and a dragonfly, beside a vase of flowers' },
+    { name: 'Black Tote Bag', price: 1599, img: 'p-black-tote.jpg', alt: 'Black jute tote bag embroidered with a pink blossoming tree over a white park bench' },
+    { name: 'Blossom Bench Tote, Natural Jute', price: 1499, img: 'p-white-tote-2.jpg', alt: 'Natural jute tote with tan handles, embroidered with pink blossoms hanging from a branch over a white outline bench and tulips' },
+    { name: 'Blossom Bench Tote, Black', price: 1599, img: 'p-white-tote-3.jpg', alt: 'Black jute tote embroidered with a blossoming tree, a white outline bench and a border of pink tulips' },
+    { name: 'Cottage Pond Tote, Cream Jute', price: 1499, img: 'p-white-tote-4.jpg', alt: 'Cream jute tote embroidered with pink blossom trees, a red cottage, a stone path, a blue pond and sheep' }
+  ] },
+  'sling-bag': { blurb: 'Round jute sling bags with a gold chain, each hand-embroidered with a little girl and her garden.', designs: [
+    { name: 'Garden Helper Sling, Natural Jute', price: 1899, img: 'p-sling-1.jpg', alt: 'Round natural jute sling bag with a gold chain, embroidered with a girl in a yellow hat and dress watering potted flowers beside a white cat' },
+    { name: 'Bouquet Girl Sling, Tan Jute', price: 1899, img: 'p-sling-2.jpg', alt: 'Round tan jute sling bag with a yellow stitched ring, embroidered with a girl holding a pink and cream flower bouquet and a green bow' },
+    { name: 'Butterfly Meadow Sling, Cream Jute', price: 1899, img: 'p-sling-3.jpg', alt: 'Round cream jute sling bag with blue piping, embroidered with a girl in a white lace dress with red butterfly wings, a red flower and a green grass ring' },
+    { name: 'Flower Gatherer Sling, Cream Jute', price: 1899, img: 'p-sling-4.jpg', alt: 'Round cream jute sling bag with blue piping, embroidered with a blue-outlined girl in a long dress among pink and purple French knot flowers' },
+    { name: 'Two Friends Sling, Black Jute', price: 1999, img: 'p-sling-5.jpg', alt: 'Round black jute sling bag with a green lace border, embroidered with two girls seen from behind among yellow and pink tulips' },
+    { name: 'Polka Bonnet Sling, Cream Jute', price: 1899, img: 'p-sling-6.jpg', alt: 'Round cream jute sling bag with a green stitched ring, embroidered with a girl in a red polka-dot bonnet and a red bow beside three small flowers' }
+  ] },
+  'pouch': { blurb: 'Small zip pouches in coloured jute, each with its own little hand-embroidered character.', designs: [
+    { name: 'Umbrella Friend Pouch, Blue Jute', price: 499, img: 'p-pouch-v2.jpg', alt: 'Small blue jute zip pouch embroidered with a grey forest creature holding a blue umbrella' },
+    { name: 'Rainy Day Friends Pouch, Blue Jute', price: 499, img: 'p-pouch-2.jpg', alt: 'Blue jute zip pouch embroidered with two grey forest creatures sharing a yellow umbrella and a few yellow flowers' },
+    { name: 'Balloon Bunny Pouch, Red Jute', price: 499, img: 'p-pouch-3.jpg', alt: 'Red jute zip pouch embroidered with a white bunny in a green jumper holding a yellow balloon' },
+    { name: 'Doghouse Dreamer Pouch, Yellow Jute', price: 499, img: 'p-pouch-4.jpg', alt: 'Yellow jute zip pouch embroidered with a white dog and a small yellow bird resting on a red doghouse roof' },
+    { name: 'Blossom Branch Pouch, Blue Jute', price: 499, img: 'p-pouch-5.jpg', alt: 'Blue jute zip pouch embroidered with a grey forest creature and a tiny black cat on a branch of pink French knot blossoms' },
+    { name: 'Garden Buddies Pouch, Red Jute', price: 499, img: 'p-pouch-6.jpg', alt: 'Red jute zip pouch embroidered with a white dog and a white bunny sitting side by side on a green lace border' }
+  ] },
   'desi': { blurb: 'Everyday jute bags with simple, graceful embroidered flowers.' },
-  'cushions': { blurb: 'Embroidered cushion covers in silk and linen to brighten a sofa.' }
+  'cushions': { blurb: 'Embroidered cushion covers in silk and linen to brighten a sofa.', designs: [
+    { name: 'Blossom Sprig Cushion, Natural Linen', price: 1299, img: 'p-cushion-1.jpg', alt: 'Square natural linen cushion on a sofa, embroidered with sprigs of pink, lilac and white French knot blossoms and a yellow centre' },
+    { name: 'Bunny Teapot Cushion, Rust Silk', price: 1299, img: 'p-cushion-2.jpg', alt: 'Rust-orange silk cushion with piped edges, embroidered with a white bunny among small flowers beside a teapot overflowing with flowers, on lace trim' }
+  ] },
+  'potli': { blurb: 'Drawstring potli bags, hand-embroidered and made for festive days and gifting.', designs: [
+    { name: 'Festive Stockings Potli, Cream Jute', price: 799, img: 'p-potli-v2.jpg', alt: 'Cream jute potli drawstring bag with a gold cord and green lace trim, embroidered with four hanging Christmas stockings on a leafy garland' },
+    { name: 'Potli, Design 2', price: 799, img: null },
+    { name: 'Potli, Design 3', price: 799, img: null },
+    { name: 'Potli, Design 4', price: 799, img: null }
+  ] }
 };
 Object.entries(CATEGORIES).forEach(([cid, c]) => {
   const parent = byId[cid];
-  c.items = Array.from({ length: PLACEHOLDERS }, (_, i) => ({ id: `${cid}-${i + 1}`, name: `${parent.name}, Design ${i + 1}`, price: parent.price, img: null }));
+  c.items = (c.designs || Array.from({ length: PLACEHOLDERS }, (_, i) => ({ name: `${parent.name}, Design ${i + 1}`, price: parent.price, img: null }))).map((d, i) => ({ id: `${cid}-${i + 1}`, ...d }));
   c.items.forEach(it => { byId[it.id] = { ...it, img: it.img || parent.img, alt: it.alt || parent.alt || it.name, shown: it.img }; });
 });
 const PREVIEW = ['white-tote', 'sling-bag', 'desi', 'cushions'];
@@ -1201,7 +1233,7 @@ function bindCards(g, onOpen) {
 function initStore() {
   if (storeBuilt) return; storeBuilt = true;
   const g = $('#store-grid');
-  g.innerHTML = PRODUCTS.map((p, i) => cardHTML(p, true, i)).join('');
+  g.innerHTML = PRODUCTS.map((p, i) => cardHTML(p, !p.ph, i)).join('');
   bindCards(g, id => { location.hash = '#store/' + id; });
 }
 let catBound = false;
@@ -1307,11 +1339,12 @@ function initHeroLoop(vid, src) {
   vid.muted = true; vid.preload = 'auto'; vid.src = src; vid.load();
   return () => { dead = true; off(); document.removeEventListener('visibilitychange', onVis); vid.pause(); vid.removeAttribute('src'); vid.load(); vid.classList.remove('on'); };
 }
-const init = { home: initHome, store: () => { initStore(); teardown.store = initHeroLoop($('#store-video'), 'store-hero.mp4'); }, gallery: () => { initGallery(); const g = teardown.gallery, h = initHeroLoop($('#gallery-video'), 'gallery-hero.mp4'); teardown.gallery = () => { g && g(); h(); }; }, cart: () => renderCartPage(), payment: () => renderPay() };
+const init = { home: initHome, store: () => { initStore(); teardown.store = initHeroLoop($('#store-video'), 'store-hero-v3.mp4'); }, gallery: () => { initGallery(); const g = teardown.gallery, h = initHeroLoop($('#gallery-video'), 'gallery-hero-v2.mp4'); teardown.gallery = () => { g && g(); h(); }; }, cart: () => renderCartPage(), payment: () => renderPay() };
 function route() {
   let r = location.hash.slice(1), pg = r;
   const cm = /^store\/([\w-]+)$/.exec(r);
   if (cm && CATEGORIES[cm[1]]) pg = 'category';
+  else if (cm) { location.replace('#store'); return; } // retired category (e.g. an old bookmark): back to the Store
   else if (r === 'cart/recent') pg = 'memory';
   else if (!ROUTES.includes(r)) { if (current) return; r = pg = 'home'; }
   if (r === current) return;
